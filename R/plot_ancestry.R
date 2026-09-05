@@ -39,14 +39,15 @@ plot_ancestry_bar <- function(data, palette = NULL, order = NULL,
   }
   colors <- cluster_colors(x$clusters, palette)
   q <- as.matrix(x$ancestry[match(order, ids), x$clusters, drop = FALSE])
-  old <- graphics::par(mar = c(if (labels) 7 else 3, 4, 4, 2) + 0.1)
+  old <- graphics::par(mar = c(if (labels) 7 else 3, 4, 5, 2) + 0.1)
   on.exit(graphics::par(old), add = TRUE)
   positions <- graphics::barplot(t(q), col = colors, border = "white",
                                  space = 0.08, ylim = c(0, 1),
                                  names.arg = if (labels) order else rep("", length(ids)),
-                                 las = 2, cex.names = 0.8, main = main,
+                                 las = 2, cex.names = 0.8, main = "",
                                  ylab = "Ancestry proportion")
-  graphics::legend("top", inset = c(0, -0.14), legend = names(colors),
+  graphics::title(main = main, line = 3)
+  graphics::legend("top", inset = c(0, -0.06), legend = names(colors),
                    fill = colors, border = NA, horiz = TRUE, bty = "n",
                    xpd = NA, cex = 0.85)
   invisible(list(order = order, colors = colors, positions = positions,
@@ -147,7 +148,7 @@ plot_ancestry_map <- function(data, palette = NULL, radius = 0.035,
     }
     rownames(label_positions) <- ids
   }
-  graphics::legend("top", inset = c(0, -0.14), legend = names(colors),
+  graphics::legend("top", inset = c(0, -0.06), legend = names(colors),
                    fill = colors, border = NA, horiz = TRUE, bty = "n",
                    xpd = NA, cex = 0.85)
   invisible(list(ids = x$ancestry[[x$id]], colors = colors,
