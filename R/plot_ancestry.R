@@ -46,8 +46,8 @@ plot_ancestry_bar <- function(data, palette = NULL, order = NULL,
                                  names.arg = if (labels) order else rep("", length(ids)),
                                  las = 2, cex.names = 0.8, main = "",
                                  ylab = "Ancestry proportion")
-  graphics::title(main = main, line = 3)
-  graphics::legend("top", inset = c(0, -0.06), legend = names(colors),
+  graphics::title(main = main, line = 2.5)
+  graphics::legend("top", inset = c(0, -0.18), legend = names(colors),
                    fill = colors, border = NA, horiz = TRUE, bty = "n",
                    xpd = NA, cex = 0.85)
   invisible(list(order = order, colors = colors, positions = positions,
