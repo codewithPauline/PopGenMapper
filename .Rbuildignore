@@ -1,6 +1,7 @@
-^\\.github$
-^\\.gitignore$
-^README\\.md$
-^LICENSE\\.md$
+^\.github$
+^\.gitignore$
+^README\.md$
+^LICENSE\.md$
 ^docs$
-^.*\\.Rproj$
+^results$
+^.*\.Rproj$
