@@ -176,9 +176,21 @@ The pale blue background is a design choice, not a water-body dataset.
 
 See the [complete mapping tutorial](docs/TUTORIAL.md).
 
+## Platform validation
+
+The development package passed build, `R CMD check --no-manual`, tests,
+and installation checks on GitHub-hosted **Windows, macOS, and Linux**
+runners using the current R release. All three reported **Status: OK**.
+
+[View the verified run](https://github.com/codewithPauline/PopGenMapper/actions/runs/33997674184)
+
+These checks cover the hosted environments above, not every operating-system
+or older R version. Both optional geographic dependencies, sf and maps, were
+installed during testing.
+
 ## Next milestone
 
-Cross-platform installation checks and broader real-world testing. See the [roadmap](docs/ROADMAP.md).
+Broader real-world testing and preparation of the first tagged release. See the [roadmap](docs/ROADMAP.md).
 
 ## Author and license
 
