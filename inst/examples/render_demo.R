@@ -1,0 +1,12 @@
+# Run from the repository root after installing PopGenMapper.
+library(PopGenMapper)
+dir.create("results", showWarnings = FALSE)
+demo <- example_ancestry()
+x <- validate_ancestry(demo$ancestry, demo$coordinates)
+palette <- c(Cluster1 = "#0072B2", Cluster2 = "#D55E00")
+grDevices::svg("results/ancestry-barplot.svg", width = 10, height = 6)
+plot_ancestry_bar(x, palette, main = "PopGenMapper | Synthetic ancestry")
+grDevices::dev.off()
+grDevices::svg("results/ancestry-map.svg", width = 9, height = 7)
+plot_ancestry_map(x, palette, main = "PopGenMapper | Fictional locations")
+grDevices::dev.off()

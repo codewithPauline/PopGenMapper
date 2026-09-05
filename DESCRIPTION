@@ -1,12 +1,13 @@
 Package: PopGenMapper
-Title: Validate Population Ancestry Data for Geographic Visualization
-Version: 0.0.0.9000
+Title: Validate and Visualize Population Ancestry
+Version: 0.0.0.9001
 Authors@R: person("Pauline", "Owusu-Ansah",
     email = "paulineowusu653@gmail.com", role = c("aut", "cre"))
-Description: Checks sample identifiers, ancestry proportions, and geographic
-    coordinates before population ancestry visualization. Includes fictional
-    example data for learning and development. Geographic plotting is planned
-    for a subsequent development milestone.
+Description: Validates sample identifiers, ancestry proportions, and geographic
+    coordinates. Draws individual ancestry barplots and regional geographic
+    pie maps with consistent cluster colors. Includes fictional example data
+    for learning and development.
+Imports: graphics, grDevices
 License: MIT + file LICENSE
 Encoding: UTF-8
 Depends: R (>= 4.1.0)

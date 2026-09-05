@@ -1,26 +1,17 @@
 # Development roadmap
 
-## Foundation — this revision
+## Implemented
+- Package structure, documentation, license, fictional examples, and validation.
+- Individual ancestry barplots with explicit sample ordering.
+- Regional pie maps with device-circular pies and a basemap callback.
+- Named palettes shared between both plot types.
+- SVG demo export and automated package/plotting checks.
 
-- R package metadata, namespace, documentation, and MIT license.
-- Input validator for individual ancestry and decimal-degree coordinates.
-- Six-sample fictional example.
-- Automated package checks and validation tests.
+## Next
+- Explicit locality IDs and aggregation rules.
+- Label placement for dense sites.
+- Projected basemaps with explicit coordinate reference systems.
+- Cross-platform checks and larger-data examples.
 
-## First plotting milestone
-
-- Ancestry barplots with explicit individual order and a named cluster palette.
-- Geographic pie maps using a user-supplied basemap.
-- Consistent cluster colors across both plot types.
-- A complete example from validation to exported figures.
-
-## Later work
-
-- Explicit locality mapping and aggregation; never infer locality by deleting
-  arbitrary parts of sample identifiers.
-- CSV import helpers with clear column selection.
-- Projection handling and geographic layout tests.
-- Installation checks across operating systems and a tutorial.
-
-No release date or CRAN acceptance is promised. The first usable mapping
-release should follow passing package checks and visual inspection of outputs.
+The current map is a regional longitude/latitude display. It does not infer
+localities, transform projections, estimate ancestry, or infer gene flow.

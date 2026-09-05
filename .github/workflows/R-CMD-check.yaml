@@ -23,3 +23,12 @@ jobs:
         with:
           name: R-check-report
           path: PopGenMapper.Rcheck/
+      - name: Install and render examples
+        run: |
+          R CMD INSTALL PopGenMapper_*.tar.gz
+          Rscript inst/examples/render_demo.R
+      - name: Upload example figures
+        uses: actions/upload-artifact@v4
+        with:
+          name: synthetic-example-figures
+          path: results/*.svg

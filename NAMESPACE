@@ -1,2 +1,4 @@
 export(validate_ancestry)
 export(example_ancestry)
+export(plot_ancestry_bar)
+export(plot_ancestry_map)
