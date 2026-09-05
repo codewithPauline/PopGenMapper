@@ -55,7 +55,13 @@ plot_ancestry_bar <- function(data, palette = NULL, order = NULL,
 
 plot_ancestry_map <- function(data, palette = NULL, radius = 0.035,
                               main = "Geographic ancestry", labels = TRUE,
-                              draw_basemap = NULL) {
+                              draw_basemap = NULL, label_method = c("auto", "above"),
+                              label_cex = 0.75) {
+  label_method <- match.arg(label_method)
+  if (!is.numeric(label_cex) || length(label_cex) != 1L ||
+      !is.finite(label_cex) || label_cex <= 0) {
+    stop("label_cex must be a positive finite number.", call. = FALSE)
+  }
   x <- checked_plot_data(data)
   if (!is.numeric(radius) || length(radius) != 1L || !is.finite(radius) ||
       radius <= 0 || radius > 0.1) {
@@ -116,13 +122,35 @@ plot_ancestry_map <- function(data, palette = NULL, radius = 0.035,
     }
     sectors[[i]] <- pieces
   }
+  label_positions <- NULL
   if (labels) {
-    graphics::text(longitude, latitude + ry * 1.35,
-                   labels = x$ancestry[[x$id]], pos = 3, cex = 0.75)
+    ids <- x$ancestry[[x$id]]
+    if (label_method == "above") {
+      label_positions <- cbind(longitude, latitude + ry * 1.35)
+      graphics::text(label_positions, labels = ids, pos = 3, cex = label_cex)
+    } else {
+      dx <- diff(usr[1:2]); dy <- diff(usr[3:4])
+      layout <- place_map_labels(
+        (longitude - usr[1]) / dx, (latitude - usr[3]) / dy,
+        graphics::strwidth(ids, cex = label_cex) / dx + 0.012,
+        graphics::strheight(ids, cex = label_cex) / dy + 0.012,
+        rx / dx, ry / dy)
+      label_positions <- cbind(usr[1] + layout$positions[, 1] * dx,
+                                usr[3] + layout$positions[, 2] * dy)
+      graphics::segments(longitude, latitude, label_positions[, 1],
+                          label_positions[, 2], col = "#707A80", lwd = 0.6)
+      graphics::text(label_positions, labels = ids, cex = label_cex)
+      if (any(layout$crowded)) {
+        warning("Some labels could not be separated; use a larger device, smaller label_cex, or labels = FALSE.",
+                call. = FALSE)
+      }
+    }
+    rownames(label_positions) <- ids
   }
   graphics::legend("top", inset = c(0, -0.14), legend = names(colors),
                    fill = colors, border = NA, horiz = TRUE, bty = "n",
                    xpd = NA, cex = 0.85)
   invisible(list(ids = x$ancestry[[x$id]], colors = colors,
-                 sectors = sectors, radius = c(longitude = rx, latitude = ry)))
+                 sectors = sectors, radius = c(longitude = rx, latitude = ry),
+                 label_positions = label_positions))
 }

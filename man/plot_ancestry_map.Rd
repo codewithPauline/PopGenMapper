@@ -4,7 +4,8 @@
 \usage{
 plot_ancestry_map(data, palette = NULL, radius = 0.035,
                  main = "Geographic ancestry", labels = TRUE,
-                 draw_basemap = NULL)
+                 draw_basemap = NULL, label_method = c("auto", "above"),
+                 label_cex = 0.75)
 }
 \arguments{
 \item{data}{Result of \code{validate_ancestry()}. Inputs are checked again.}
@@ -14,6 +15,9 @@ The default uses the Dark 3 HCL palette in cluster-column order.}
 must be greater than zero and at most 0.1.}
 \item{main}{Plot title.}
 \item{labels}{Logical: display sample IDs above pies.}
+\item{label_method}{Automatic deterministic placement with leader lines,
+or the original above-pie placement.}
+\item{label_cex}{Positive numeric label size multiplier.}
 \item{draw_basemap}{Optional function with no required arguments that adds
 a longitude/latitude basemap to the existing plot without resetting its limits
 or aspect ratio. NULL draws a coordinate grid only.}
@@ -26,10 +30,14 @@ rejected; dateline-crossing data are unsupported. Duplicate coordinate pairs
 produce an overlap warning; no automatic locality aggregation is performed.
 Pies are circular in device space. Accepted row-sum rounding differences are
 closed to a full circle for drawing; the input data are not modified.
-Labels may overlap in dense datasets. Export to a larger device or disable them.
+Automatic placement searches for label boxes clear of pies and earlier labels.
+It is a greedy method, not a guarantee of collision-free placement; unresolved
+collisions emit a warning. Export to a larger device, reduce label size, or
+turn labels off. Use aggregate_localities for explicit locality summaries.
 The default background is a coordinate grid, not a geographic boundary dataset.}
 \value{Invisibly returns a list of sample \code{ids}, named \code{colors},
-drawn \code{sectors}, and the pie \code{radius} in longitude and latitude units.}
+drawn \code{sectors}, the pie \code{radius} in longitude and latitude units, and
+\code{label_positions} (NULL when labels are disabled).}
 \examples{
 demo <- example_ancestry()
 x <- validate_ancestry(demo$ancestry, demo$coordinates)

@@ -6,12 +6,14 @@
 - Regional pie maps with device-circular pies and a basemap callback.
 - Named palettes shared between both plot types.
 - SVG demo export and automated package/plotting checks.
+- Explicit locality means, sample counts, and membership provenance.
+- Deterministic label placement with leader lines and crowding warnings.
 
 ## Next
-- Explicit locality IDs and aggregation rules.
-- Label placement for dense sites.
+- Projected basemaps with explicit coordinate reference systems.
+- Cross-platform installation checks.
 - Projected basemaps with explicit coordinate reference systems.
 - Cross-platform checks and larger-data examples.
 
-The current map is a regional longitude/latitude display. It does not infer
-localities, transform projections, estimate ancestry, or infer gene flow.
+The current map is a regional longitude/latitude display. It requires explicit locality membership and does not transform projections,
+estimate ancestry, or infer gene flow.

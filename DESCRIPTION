@@ -1,11 +1,12 @@
 Package: PopGenMapper
 Title: Validate and Visualize Population Ancestry
-Version: 0.0.0.9001
+Version: 0.0.0.9002
 Authors@R: person("Pauline", "Owusu-Ansah",
     email = "paulineowusu653@gmail.com", role = c("aut", "cre"))
 Description: Validates sample identifiers, ancestry proportions, and geographic
     coordinates. Draws individual ancestry barplots and regional geographic
-    pie maps with consistent cluster colors. Includes fictional example data
+    pie maps with consistent cluster colors, explicit locality summaries,
+    and collision-aware label placement. Includes fictional example data
     for learning and development.
 Imports: graphics, grDevices
 License: MIT + file LICENSE

@@ -10,3 +10,13 @@ grDevices::dev.off()
 grDevices::svg("results/ancestry-map.svg", width = 9, height = 7)
 plot_ancestry_map(x, palette, main = "PopGenMapper | Fictional locations")
 grDevices::dev.off()
+
+demo$coordinates$longitude <- rep(c(-85, -84, -83), each = 2)
+demo$coordinates$latitude <- rep(c(38, 39, 40), each = 2)
+x <- validate_ancestry(demo$ancestry, demo$coordinates)
+membership <- data.frame(sample_id = demo$ancestry$sample_id,
+                         locality_id = rep(c("A", "B", "C"), each = 2))
+sites <- aggregate_localities(x, membership)
+grDevices::svg("results/locality-map.svg", width = 9, height = 7)
+plot_ancestry_map(sites, palette, main = "PopGenMapper | Fictional localities")
+grDevices::dev.off()
