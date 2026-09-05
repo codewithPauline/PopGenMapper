@@ -20,3 +20,16 @@ sites <- aggregate_localities(x, membership)
 grDevices::svg("results/locality-map.svg", width = 9, height = 7)
 plot_ancestry_map(sites, palette, main = "PopGenMapper | Fictional localities")
 grDevices::dev.off()
+
+if (requireNamespace("sf", quietly = TRUE) && requireNamespace("maps", quietly = TRUE)) {
+  states <- ancestry_basemap("state", c("ohio", "indiana", "kentucky"))
+  grDevices::png("results/projected-map.png", width = 1200, height = 900, res = 130)
+  plot_ancestry_projected(sites, states, crs = 5070, palette = palette,
+                          main = "PopGenMapper | Synthetic locality ancestry")
+  graphics::mtext("Fictional samples | Boundaries: maps package | EPSG:5070",
+                   side = 1, line = 0.2, cex = 0.7)
+  grDevices::dev.off()
+  grDevices::png("results/ancestry-barplot.png", width = 1200, height = 750, res = 130)
+  plot_ancestry_bar(x, palette, main = "PopGenMapper | Synthetic individual ancestry")
+  grDevices::dev.off()
+}

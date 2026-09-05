@@ -18,7 +18,7 @@ PopGenMapper is being developed to connect ancestry estimates with sample geogra
 | Explicit locality summaries and SVG/PDF export | Implemented |
 | Automatic label placement with leader lines | Implemented |
 
-**Development version: 0.0.0.9002.** This is an early development package, not a CRAN release. Check [GitHub Actions](https://github.com/codewithPauline/PopGenMapper/actions) for the current package-check result. The initial package check passed on GitHub Actions; each new commit triggers another check.
+**Development version: 0.0.0.9003.** This is an early development package, not a CRAN release. Check [GitHub Actions](https://github.com/codewithPauline/PopGenMapper/actions) for the current package-check result. The initial package check passed on GitHub Actions; each new commit triggers another check.
 
 ## Try the development version
 
@@ -83,7 +83,7 @@ Clone this repository and run:
 
 ```bash
 R CMD build .
-R CMD check --no-manual PopGenMapper_0.0.0.9002.tar.gz
+R CMD check --no-manual PopGenMapper_0.0.0.9003.tar.gz
 ```
 
 Tests cover shuffled coordinate rows, mismatched and duplicate IDs, invalid proportions, invalid coordinates, and custom cluster columns. They use base R without a testing framework dependency.
@@ -138,9 +138,32 @@ Map labels now use deterministic candidate placement with leader lines.
 Dense maps can still require a larger output device, smaller `label_cex`,
 or `labels = FALSE`. Use `label_method = "above"` for the previous placement.
 
+## Projected basemaps
+
+Install the optional geographic dependencies once:
+
+```r
+install.packages(c("sf", "maps"))
+states <- ancestry_basemap("state", c("ohio", "indiana", "kentucky"))
+plot_ancestry_projected(sites, states, crs = 5070, palette = palette)
+```
+
+Here `sites` is the locality object from the example above. EPSG:5070 is used
+for this contiguous-U.S. example; choose a projection appropriate to your own
+region. Both samples and boundaries are transformed using sf. You can also
+supply your own sf polygon layer with its CRS declared. Use
+`ancestry_basemap("world", regions = "ghana")` to retrieve a country boundary;
+a suitable local projection must be supplied when plotting.
+
+The full extent of your supplied basemap is shown. State/country boundaries
+come from the maps package; they are display data, not survey-grade boundaries.
+The pale blue background is a design choice, not a water-body dataset.
+
+See the [complete mapping tutorial](docs/TUTORIAL.md).
+
 ## Next milestone
 
-Projected basemaps and cross-platform installation checks. See the [roadmap](docs/ROADMAP.md).
+Cross-platform installation checks and broader real-world testing. See the [roadmap](docs/ROADMAP.md).
 
 ## Author and license
 

@@ -17,3 +17,8 @@
 
 The current map is a regional longitude/latitude display. It requires explicit locality membership and does not transform projections,
 estimate ancestry, or infer gene flow.
+
+## Projected basemaps — implemented
+- Optional sf transformations for sample points and polygon boundaries.
+- Offline state/world boundary helpers via maps.
+- Complete example and mapping tutorial.

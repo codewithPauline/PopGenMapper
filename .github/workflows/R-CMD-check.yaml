@@ -13,6 +13,9 @@ jobs:
         with:
           r-version: release
           use-public-rspm: true
+      - uses: r-lib/actions/setup-r-dependencies@v2
+        with:
+          extra-packages: any::sf, any::maps
       - name: Build package
         run: R CMD build .
       - name: Check package
@@ -31,4 +34,11 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: synthetic-example-figures
-          path: results/*.svg
+          path: results/
+      - name: Preview image payloads
+        shell: python
+        run: |
+          import base64, json, pathlib
+          for name in ["projected-map.png", "ancestry-barplot.png"]:
+              p = pathlib.Path("results") / name
+              print("PREVIEW_JSON " + json.dumps({"name":name,"data":base64.b64encode(p.read_bytes()).decode()}))
